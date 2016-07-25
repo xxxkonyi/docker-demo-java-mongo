@@ -16,22 +16,22 @@ import java.util.UUID;
 @RestController
 public class VisitorController {
 
-    @Resource
-    VisitorRepository visitorRepository;
+  @Resource
+  VisitorRepository visitorRepository;
 
-    @RequestMapping("")
-    public String index(HttpServletRequest request){
+  @RequestMapping("/visitor")
+  public String index(HttpServletRequest request) {
 
-        Visitor visitor = new Visitor();
-        visitor.setId(UUID.randomUUID().toString());
-        visitor.setIp(request.getRemoteAddr());
-        visitor.setVisitDate(new Date());
+    Visitor visitor = new Visitor();
+    visitor.setId(UUID.randomUUID().toString());
+    visitor.setIp(request.getRemoteAddr());
+    visitor.setVisitDate(new Date());
 
-        visitorRepository.save(visitor);
+    visitorRepository.save(visitor);
 
-        Long count =  visitorRepository.count();
+    Long count = visitorRepository.count();
 
 
-        return String.format("你是来自%s的第%d位访问者。",request.getRemoteAddr(),count);
-    }
+    return String.format("你是来自%s的第%d位访问者。", request.getRemoteAddr(), count);
+  }
 }
